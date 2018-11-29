@@ -6,24 +6,28 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class Util
-{
-
+{  
   public static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
   public static String DB_URL = "jdbc:mysql://";
   
-  public static String USER = "canal";
-  public static String PASS = "canal";
+  public static String USER = "xxx";
+  public static String PASS = "xxx";
   
   public static void exportstructure(String userName, String path, String db) throws IOException, SQLException {
     BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
@@ -60,14 +64,26 @@ public class Util
     }
     
     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(userName + "_" + db + "_fixed" + ".txt")));
+    String laDb = "";
+    String laTb = "";
     for (Map<String, String> map_item : list)
-    {
+    {      
       map_item.replace("desc", ((String)map_item.get("desc")).replace("'", ""));
-      bw.write((String)map_item.get("db") + "\t" + (String)map_item.get("tb") + "\t" + (String)map_item.get("field") + "\t" + (String)map_item.get("desc") + "\n");
-      String sql = "use " + map_item.get("db").toString();
-      System.out.println(sql);
-      executesql(sql);
-      sql = "delete from " + map_item.get("tb");
+      String curDb = map_item.get("db").toString();
+      String curTb = map_item.get("tb").toString();
+      if (curTb.equals(laTb)) {
+		  continue;
+	  }else {
+		  laTb = curTb;
+	  }
+      if (!curDb.equals(laDb)) {
+    	  String sql = "use " + map_item.get("db").toString();
+          System.out.println(sql);
+          executesql(sql);
+          laDb = curDb;
+	  }
+      
+      String sql = "delete from " + map_item.get("tb");
       System.out.println(sql);
       executesql(sql);
     }
