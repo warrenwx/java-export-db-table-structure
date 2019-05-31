@@ -3,18 +3,18 @@
 这份文件使用工具解析出我们需要的内容（分库分表默认是16个，可以修改成其他，用来区分）。
 结果如下：
 t_1 = { 
-	["TB"] = "t_xxx1", 
-	["DB"] = "db_xxxx", 
-	["fields"] = {"id","t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12",}, 
-	["src_2_dst_map"] = {db = "db_xxx2", tb = "t_xxx23",},
-	["use_id_limit"] = true, 
-	["keys"] = {"id",},  },
+    ["TB"] = "t_xxx1", 
+    ["DB"] = "db_xxxx", 
+    ["fields"] = {"id","t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12",}, 
+    ["src_2_dst_map"] = {db = "db_xxx2", tb = "t_xxx23",},
+    ["use_id_limit"] = true, 
+    ["keys"] = {"id",},  },
 t_2 = { 
-	["TB"] = "t_xxxx2", 
-	["DB"] = "db_xxxxxx", 
-	["fields"] = {"id","t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13","t14"}, 
-	["src_2_dst_map"] = {db = "db_xxxx22", tb = "t_xxxxxxx3",},
-	["use_id_limit"] = true, 
-	["keys"] = {"id",},  },
+    ["TB"] = "t_xxxx2", 
+    ["DB"] = "db_xxxxxx", 
+    ["fields"] = {"id","t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13","t14"}, 
+    ["src_2_dst_map"] = {db = "db_xxxx22", tb = "t_xxxxxxx3",},
+    ["use_id_limit"] = true, 
+    ["keys"] = {"id",},  },
   
   ......
